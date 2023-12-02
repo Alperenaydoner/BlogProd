@@ -42,7 +42,6 @@ $(document).ready(function () {
         $(".education_section").append(html);
 
     });
-
     $("#add_experience").click(function (e) {
         e.preventDefault();
 
@@ -51,13 +50,13 @@ $(document).ready(function () {
             <span onclick="remove_section(this)" class="position-absolute" style="top: 10px; right: 15px; cursor: pointer;"><i class="fa fa-close"></i></span>
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold text-secondary">Job Title</label>
-                <input type="text" id="job_title" name="job_title[]"
+                <input type="text" id="job_title" name="experience[${experienceCounter}][job_title]"
                     class="form-control" placeholder="Job Title" />
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold text-secondary">Organization</label>
                 <input type="text" id="organization"
-                    name="organization[]" class="form-control"
+                    name="experience[${experienceCounter}][organization]" class="form-control"
                     placeholder="Organization" />
             </div>
             <div class="row mb-4">
@@ -65,7 +64,7 @@ $(document).ready(function () {
                     <div class="form-outline">
                         <label class="form-label fw-bold text-secondary">Start Date</label>
                         <input type="date" id="job_start_date"
-                            name="job_start_date[]"
+                            name="experience[${experienceCounter}][job_start_date]"
                             class="form-control" />
                     </div>
                 </div>
@@ -73,19 +72,19 @@ $(document).ready(function () {
                     <div class="form-outline">
                         <label class="form-label fw-bold text-secondary">End Date</label>
                         <input type="date" id="job_end_date"
-                            name="job_end_date[]" class="form-control" />
+                            name="experience[${experienceCounter}][job_end_date]" class="form-control" />
                     </div>
                 </div>
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold text-secondary">Job Description</label>
-                <textarea class="form-control" placeholder="Job Descripton" id="job_description" name="job_description[]"
+                <textarea class="form-control" placeholder="Job Descripton" id="job_description" name="experience[${experienceCounter}][job_description]"
                     rows="4"></textarea>
             </div>
         </div>
         </div>`;
-
         $(".experience_section").append(html);
+        experienceCounter++;
 
     });
 
@@ -98,13 +97,13 @@ $(document).ready(function () {
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold text-secondary">Project Title</label>
                 <input type="text" id="project_title"
-                    name="project_title[]" class="form-control"
+                    name="projects[][project_title]" class="form-control"
                     placeholder="Project Title" />
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold text-secondary">Project Description</label>
                 <textarea class="form-control" placeholder="Project Descripton" id="project_description"
-                    name="project_description[]" rows="4"></textarea>
+                    name="projects[][project_description]" rows="4"></textarea>
             </div>
         </div>
         </div>`;

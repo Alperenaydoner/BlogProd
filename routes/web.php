@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('', [UserProfile::class, 'blog'])->name('blog');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/edit', [UserProfile::class, 'edit'])->name('edit');

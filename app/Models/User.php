@@ -18,15 +18,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'twitter',
         'github_link',
         'linkedin_link',
         'phone_number',
-        'profile_title'
-    ];
+        'profile_title',
+        'about_me'
+        ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -52,9 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Education::class);
     }
 
-    public function experience()
+    public function experiences()
     {
-        return $this->hasMany(Experience::class);
+        return $this->hasMany(Experiences::class);
     }
 
     public function projects()
@@ -77,5 +79,9 @@ class User extends Authenticatable
         return $this->hasMany(Interests::class);
     }
     
+    public function fullName()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
     
 }

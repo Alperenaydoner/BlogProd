@@ -961,16 +961,6 @@
                                         </div>
                                     </div>
 
-
-                                    <!-- Checkbox -->
-                                    <div class="form-check d-flex justify-content-center mb-4">
-                                        <input class="form-check-input me-2" type="checkbox" value="1"
-                                            id="verify" name="verify" required />
-                                        <label for="verify" class="form-check-label text-dark"> Are you sure you
-                                            want to save these changes?
-                                        </label>
-                                    </div>
-
                                     <!-- Submit button -->
                                     <button type="submit" id="submitbtn" class="btn btn-lg btn-success w-100">Save
                                         Changes</button>
