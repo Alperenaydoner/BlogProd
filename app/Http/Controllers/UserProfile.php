@@ -105,6 +105,18 @@ class UserProfile extends Controller
 
     public function blogMail(Request $request){
 
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required | email',
+            'subject' => 'required',
+            'message' => 'required | min:5',
+        ], [
+            'name.required' => 'Name boş bırakılamaz.',
+            'email.required' => 'Email  boş bırakılamaz ve geçerli bir format olması gerekir.',
+            'subject.required' => 'Subject boş bırakılamaz.',
+            'message.required' => 'Message boş bırakılamaz.',
+        ]);
+
         if(empty($request->email) || empty($request->name) || empty($request->subject) || empty($request->message)){
             return response()->json(['success' => false, 'message' => 'Mail Alanlarını doldurunuz.']);
         }

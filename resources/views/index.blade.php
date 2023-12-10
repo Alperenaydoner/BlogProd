@@ -54,7 +54,7 @@
                         <div class="typed-text d-none">Web Developer, Front End Developer, Apps Developer</div>
                     </div>
                     <div class="d-flex justify-content-center mt-auto mb-3">
-                    <a class="btn btn-secondary btn-square mx-1" href={{ $user->twitter ? $user->twitter: '#' }}><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-secondary btn-square mx-1" href={{ $user->twitter ? $user->twitter: '#' }}><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-secondary btn-square mx-1" href={{ $user->github_link ? $user->github_link: '#'}}><i class="fab fa-github"></i></a>
                         <a class="btn btn-secondary btn-square mx-1" href={{ $user->linkedin_link ? $user->linkedin_link: '#' }}><i class="fab fa-linkedin-in"></i></a>
                         <a class="btn btn-secondary btn-square mx-1" href="https://www.instagram.com/alperen.aaydnr/"><i class="fab fa-instagram"></i></a>
@@ -338,10 +338,10 @@
                 <section class="wow fadeIn" data-wow-delay="0.1s">
                     <div class="bg-secondary text-light text-center p-5">
                         <div class="d-flex justify-content-center mb-4">
-                        <a class="btn btn-secondary btn-square mx-1" href={{ $user->twitter ? $user->twitter: '#' }}><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-secondary btn-square mx-1" href={{ $user->github_link ? $user->github_link: '#'}}><i class="fab fa-github"></i></a>
-                        <a class="btn btn-secondary btn-square mx-1" href={{ $user->linkedin_link ? $user->linkedin_link: '#' }}><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-secondary btn-square mx-1" href="https://www.instagram.com/alperen.aaydnr/"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-secondary btn-square mx-1" href={{ $user->twitter ? $user->twitter: '#' }}><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-secondary btn-square mx-1" href={{ $user->github_link ? $user->github_link: '#'}}><i class="fab fa-github"></i></a>
+                            <a class="btn btn-secondary btn-square mx-1" href={{ $user->linkedin_link ? $user->linkedin_link: '#' }}><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-secondary btn-square mx-1" href="https://www.instagram.com/alperen.aaydnr/"><i class="fab fa-instagram"></i></a>
                         </div>
 
                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
@@ -405,15 +405,27 @@
                         email: email,
                         subject: subject,
                         message: message,
-                        name:name
+                        name: name
                     },
                     success: function(response) {
-                        console.log(response);
-                        alert(response.message);
+                        if (response.success) {
+                            alert(response.message);
+                        } else {
+                            alert('Başarısız: ' + response.message);
+                        }
                     },
-                    error: function(error) {
-
-                        alert('E-posta gönderirken bir hata oluştu.');
+                    error: function(xhr, status, error) {
+                        // Hata durumunu kontrol et
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = "Hata oluştu:\n";
+                            for (var key in errors) {
+                                errorMessage += errors[key][0] + "\n";
+                            }
+                            alert(errorMessage);
+                        } else {
+                            alert('Hata oluştu: ' + error);
+                        }
                     }
                 });
             });
