@@ -21,5 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit', [UserProfile::class, 'edit'])->name('edit');
     Route::post('/update', [UserProfile::class, 'update'])->name('update');
 });
+Route::post('/blogMail', [UserProfile::class, 'blogMail'])->name('mail');
 
 require __DIR__.'/auth.php';

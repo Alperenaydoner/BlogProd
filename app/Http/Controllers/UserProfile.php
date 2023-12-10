@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Mail\BlogMailRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CustomMail;
 
 class UserProfile extends Controller
 {
@@ -97,8 +100,29 @@ class UserProfile extends Controller
 
         //Interests Eklenecek . Interests
 */
-
-
         return redirect()->back()->withSuccess("User Profile updated successfully");
+    }
+
+    public function blogMail(Request $request){
+
+        if(empty($request->email) || empty($request->name) || empty($request->subject) || empty($request->message)){
+            return response()->json(['success' => false, 'message' => 'Mail Alanlarını doldurunuz.']);
+        }
+        try {
+            // E-posta gönderme işlemi
+            $messageContent = $request->mail . ' adresi iletişime geçmek istiyor. Mail içeriği: ' . $request->message;
+            $subject = $request->subject;
+            
+            Mail::to(env('MAIL_FROM_ADDRESS', 'hello@example.com'))->send(new CustomMail($subject, $messageContent));
+    
+            // E-posta başarıyla gönderildi
+            return response()->json(['success' => true, 'message' =>'Mailiniz iletildi']);
+        } catch (\Exception $e) {
+            // Hata durumunda hatayı logla veya farklı bir işlem yap
+            \Log::error('E-posta gönderme hatası: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Hata oluştu lüfen tekrar deneyiniz']);
+        }
+
+
     }
 }

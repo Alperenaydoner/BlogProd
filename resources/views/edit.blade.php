@@ -14,7 +14,6 @@
                                     {{-- Personal user --}}
                                     <div class="row">
                                         <div class="col-12">
-                                            <h2 class="fw-bold text-secondary">Personal user</h2>
                                             <div class="form-outline mb-4">
                                                 <input type="hidden" id="user_id" name="user_id" class="form-control"
                                                     value="{{ isset($user['id']) ? $user['id'] : '' }}" />
